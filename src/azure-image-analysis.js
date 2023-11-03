@@ -13,9 +13,9 @@ const analyzeImage = async (imageUrl) => {
       body: JSON.stringify({ url: imageUrl })
     });
 
-    console.log(endpoint);
-    console.log(subscriptionKey);
-    console.log(response);
+    // console.log(endpoint);
+    // console.log(subscriptionKey);
+    // console.log(response);
 
 
     if (!response.ok) {
