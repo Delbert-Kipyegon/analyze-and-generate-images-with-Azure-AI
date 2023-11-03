@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import DisplayResults from './DisplayResults'; 
 import analyzeImage from '../azure-image-analysis';
+import generateImage from '../azure-image-generation';
 
 function ComputerVision() {
-  const [url, setUrl] = useState('');
+  const [data, setData] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState(null);
+  const [generatedImage, setGeneratedImage] = useState('');
 
   const handleAnalyzeClick = async () => {
-    if (!url) {
+    if (!data) {
       alert('Please enter a URL to analyze.');
       return;
     }
-    console.log(url);
+    console.log(data);
     setIsProcessing(true);
     try {
 
-        console.log(url);
-      const result = await analyzeImage(url);
+        console.log(data);
+      const result = await analyzeImage(data);
       setAnalysisResult(result);
     } catch (error) {
       console.error('Failed to analyze image:', error);
@@ -27,6 +29,25 @@ function ComputerVision() {
     }
   };
 
+  const handleGenerateClick = async () => {
+    if (!data) {
+      alert('Please enter a prompt to generate.');
+      return;
+    }
+
+    console.log(data)
+    setIsProcessing(true);
+    try {
+
+      console.log(data)
+      const generatedImageUrl = await generateImage(data);
+      setGeneratedImage(generatedImageUrl);
+    } catch (error) {
+      console.error('Failed to generate image:', error);
+    }
+    setIsProcessing(false);
+  };
+
   return (
     <div>
       <h1>Computer Vision</h1>
@@ -34,17 +55,14 @@ function ComputerVision() {
       <input 
         type="text" 
         placeholder='Enter URL to analyze or textual prompt to generate an image'
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
+        value={data}
+        onChange={(e) => setData(e.target.value)}
       />
       <br /><br />
-      <button onClick={handleAnalyzeClick} disabled={isProcessing}>
-        {isProcessing ? 'Analyzing...' : 'Analyze'}
-      </button>
-      <button>Generate</button>
+      <button onClick={handleAnalyzeClick} disabled={isProcessing}>Analyze</button>
+      <button onClick={handleGenerateClick} disabled={isProcessing}>Generate</button>
       <hr />
-      <DisplayResults results={analysisResult} imageUrl={url} />
-      {/* {analysisResult && <pre>{JSON.stringify(analysisResult, null, 2)}</pre>} */}
+      {isProcessing ? <p>Processing...</p> : <DisplayResults />}
     </div>
   );
 }
