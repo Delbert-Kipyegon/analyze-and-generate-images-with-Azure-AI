@@ -1,8 +1,12 @@
-import React from 'react';
+import React from 'react'
+import ComputerVision from './components/ComputerVision'
 
 function App() {
-  const value = 'World';
-  return <div>Hello {value}</div>;
+  return (
+    <div>
+      <ComputerVision />
+    </div>
+  )
 }
 
-export default App;
+export default App
