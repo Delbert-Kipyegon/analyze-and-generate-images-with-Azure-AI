@@ -6,8 +6,8 @@ import generateImage from '../azure-image-generation';
 function ComputerVision() {
   const [data, setData] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [analysisResult, setAnalysisResult] = useState(null);
-  const [generatedImage, setGeneratedImage] = useState('');
+  // const [analysisResult, setAnalysisResult] = useState(null);
+  // const [generatedImage, setGeneratedImage] = useState('');
 
   const handleAnalyzeClick = async () => {
     if (!data) {

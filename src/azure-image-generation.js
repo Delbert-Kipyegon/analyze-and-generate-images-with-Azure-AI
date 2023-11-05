@@ -3,8 +3,8 @@ const openai_key = process.env.REACT_APP_OPEN_AI_KEY;
 const endpoint = process.env.REACT_APP_OPEN_AI_ENDPOINT; 
 
 const generateImage = async (prompt) => {
-
-    let data = JSON.stringify({ prompt});
+  
+  let data = JSON.stringify({ prompt});
 
       console.log(data)
       
@@ -19,7 +19,7 @@ const generateImage = async (prompt) => {
         data : data
       };
         
-      console.log(endpoint)
+      // console.log(endpoint)
       
       axios.request(config)
       .then((response) => {

@@ -13,11 +13,6 @@ const analyzeImage = async (imageUrl) => {
       body: JSON.stringify({ url: imageUrl })
     });
 
-    // console.log(endpoint);
-    // console.log(subscriptionKey);
-    // console.log(response);
-
-
     if (!response.ok) {
       throw new Error(`Azure AI API call failed with status: ${response.status}`);
     }
